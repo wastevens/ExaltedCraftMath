@@ -11,11 +11,9 @@ public class CraftScenario {
 	public static void main(String a[]) {
 		int attempts = 1000;
 		int successes = 0;
-		Crafter crafter = new SolarCrafter(Charms.ExperimentalConjourationOfTheVoid_Essence3,
-				                           Charms.FlawlessHandiworkMethod_Essence3,
-				                           Charms.SupremeMasterworkFocus_Essence2);
+		Crafter crafter = new SiderealCrafter(5, Charms.SublimeArtface_Essence3, Charms.TimeEnough_Essence3, Charms.Crafting_Arts);
 		for(int i=0;i<attempts;i++) {
-			if(craftAttempt(crafter, Artifact.FIVE, DIFFICULTY, TERMINUS)) {
+			if(craftAttempt(crafter, Artifact.LEGENDARY, DIFFICULTY, TERMINUS)) {
 				successes++;
 			}
 		}
@@ -32,12 +30,13 @@ public class CraftScenario {
 	private static boolean craftAttempt(Crafter crafter, ArtifactRating artifact, int difficulty, int terminus) {
 		int totalSuccesses = 0;
 		int excessSuccesses = 0;
-		for(int i=0;i<terminus;i++) {
+		int bonusTerminus = bonusToTerminus(crafter.getCharms());
+		for(int i=0;i<(terminus+bonusTerminus);i++) {
 			List<Integer> roll = Roller.craft(crafter.getDicePool());
 			craftCharms(roll, crafter.getCharms());
 			int successes = successesIn(roll, crafter);
 			totalSuccesses+= successes;
-			excessSuccesses += Math.max((successes - difficulty), 0);
+			excessSuccesses += Math.max((successes - difficulty +1), 0);
 			if(excessSuccesses >= artifact.getGoalNumber()) {
 				System.out.println("Succeded on action " + (i+1));
 				break;
@@ -49,6 +48,14 @@ public class CraftScenario {
 		return (excessSuccesses >= artifact.getGoalNumber());
 	}
 	
+	private static int bonusToTerminus(List<Charm> charms) {
+		int bonus = 0;
+		for (Charm charm : charms) {
+			bonus += charm.getBonusToTerminus();
+		}
+		return bonus;
+	}
+
 	private static void craftCharms(List<Integer> roll, List<Charm> charms) {
 		for (Charm charm : charms) {
 			roll.addAll(charm.act(roll));
@@ -56,7 +63,7 @@ public class CraftScenario {
 	}
 
 	private static int successesIn(List<Integer> rolled, Crafter crafter) {
-		int successes = 0;
+		int successes = 1; //willpower!
 		successes += rolled.stream().filter(successes(crafter.getTargetNumber())).count();
 		successes += rolled.stream().filter(successes(crafter.getDoubleTargetNumber())).count();
 		
