@@ -6,5 +6,7 @@ import com.exalted.fight.Fighter;
 public interface Strategy {
 
 	Attack toUse(Fighter attacker, Fighter defender);
+
+	String name();
 	
 }

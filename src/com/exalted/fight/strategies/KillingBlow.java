@@ -9,10 +9,14 @@ public class KillingBlow implements Strategy {
 
 	@Override
 	public Attack toUse(Fighter attacker, Fighter defender) {
-		if(attacker.initaitve > defender.armor.hardness && attacker.initaitve > (defender.health * 2)) {
+		if(attacker.initaitve > defender.armor.hardness && attacker.initaitve > (defender.health * 2) && attacker.isCrashed() == false) {
 			return new DecisiveAttack();
 		}
 		return new WitheringAttack();
 	}
 
+	@Override
+	public String name() {
+		return "Killing Blow";
+	}
 }

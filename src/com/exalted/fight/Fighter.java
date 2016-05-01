@@ -103,7 +103,7 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public void resetToBaseInitiative() {
-		this.initaitve = 3;
+		this.initaitve = Math.max(initaitve, 3);
 	}
 	
 	public int woundPenalty() {
@@ -129,8 +129,8 @@ public class Fighter implements Comparable<Fighter>{
 				          "Strength: " + strength + " Dexterity: " + dexterity + "\n" +
 				          "Stamina:  " + strength + " Wits:      " + wits + "\n" +
 				          "Melee:    " + melee +    " Awareness: " + awareness + "\n" +
-				          "Weapon: " + weapon.name() + " Armor: " + armor.name();
-	                      ;
+				          "Weapon: " + weapon.name() + " Armor: " + armor.name() + "\n" +
+				          "Strategy: " + strategy.name() + "\n";
 		return toReturn;
 	}
 	
@@ -156,5 +156,15 @@ public class Fighter implements Comparable<Fighter>{
 	
 	public boolean isCrashed() {
 		return crashCount > 0;
+	}
+	
+	public String status() {
+		String status = name + " (I:" + initaitve + ", H:" + health;
+		if(isCrashed()) {
+			status += ", Crashed for " + crashCount + " rounds)";
+		} else {
+			status += ")";
+		}
+		return status;  
 	}
 }

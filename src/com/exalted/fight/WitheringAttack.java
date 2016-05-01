@@ -18,19 +18,19 @@ public class WitheringAttack implements Attack {
 			int damageDice = Math.max(threshold + attacker.witheringDamage() - defender.witheringSoak(), attacker.weapon.overwhelming);
 			outcome += " with " + damageDice + " damage dice";
 			int damage = countIn(roll(damageDice));
-			outcome += " for " + damage + " initiative damage!";
+			outcome += " for " + damage + " Initiative damage!";
 			System.out.println(outcome);
 			attacker.initaitve += (damage + 1);
 			if(defender.loseInitative(damage)) {
 				System.out.println(defender.name + " is crashed!");
 				if(attacker.isCrashed()) {
-					System.out.println("Initatiive SHIFT!");
+					System.out.println("Initiative SHIFT!");
 					attacker.crashCount = 0;
 					attacker.initaitve = Math.max(attacker.initaitve, 3) + attacker.joinBattle(Stunt.stunt());
 					System.out.println("BONUS ATTACK!");
 					return attacker.attackAgainst(defender).attack(attacker, defender);
 				} else {
-					System.out.println("Initatiive Break!");
+					System.out.println("Initiative Break!");
 					attacker.initaitve += 5;
 				}
 			}

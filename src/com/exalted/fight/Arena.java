@@ -11,7 +11,7 @@ import com.exalted.fight.strategies.KillingBlow;
 import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
-	private static final int NUMBER_OF_FIGHTS = 10;
+	private static final int NUMBER_OF_FIGHTS = 100;
 	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new KillingBlow());
 	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new ThousandCuts());
 
@@ -40,17 +40,20 @@ public class Arena {
 		fighters.add(ALICE);
 		fighters.add(BOB);
 		fighters.forEach(f -> f.reset());
-		fighters.forEach(f -> f.joinBattle(Stunt.stunt()));
+		fighters.forEach(f -> f.initaitve = f.joinBattle(Stunt.stunt()));
 		int round = 0;
 		while(fighters.stream().anyMatch(f -> f.health > 0)) {
 			++round;
-			System.out.println("Round " + round);
 			Collections.sort(fighters);
-			if(resolve(fighters.get(0), fighters.get(1))) {
-				return fighters.get(0);
+			Fighter first = fighters.get(0);
+			Fighter second = fighters.get(1);
+			System.out.println("Round " + round + " - " + first.status() + " - " + second.status());
+			
+			if(resolve(first, second)) {
+				return first;
 			}
-			if(resolve(fighters.get(1), fighters.get(0))) {
-				return fighters.get(1);
+			if(resolve(second, first)) {
+				return second;
 			}
 			cleanUp(fighters);
 		}
