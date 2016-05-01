@@ -3,7 +3,7 @@ package com.exalted.fight;
 public enum Stunt {
 
 	ZERO(0, 0, 0),
-	ONE(2, 0, 0),
+	ONE(2, 0, 1),
 	TWO(2, 1, 2),
 	THREE(2, 2, 3);
 	
