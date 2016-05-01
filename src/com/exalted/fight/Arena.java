@@ -11,7 +11,7 @@ import com.exalted.fight.strategies.KillingBlow;
 import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
-	private static final int NUMBER_OF_FIGHTS = 100;
+	private static final int NUMBER_OF_FIGHTS = 1;
 	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new KillingBlow());
 	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new ThousandCuts());
 

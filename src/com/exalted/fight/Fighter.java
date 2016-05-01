@@ -1,5 +1,6 @@
 package com.exalted.fight;
 
+import com.exalted.fight.attacks.Attack;
 import com.exalted.fight.strategies.Strategy;
 
 import static com.exalted.fight.Roller.roll;
@@ -21,6 +22,7 @@ public class Fighter implements Comparable<Fighter>{
 	public int health;
 	public int initaitve;
 	public int crashCount;
+	public int onslaught;
 	
 	public Fighter(String name, int strength, int dexterity, int stamina, int melee, int wits, int awareness, Weapon weapon, Armor armor, Strategy strategy) {
 		this.name = name;
@@ -40,6 +42,7 @@ public class Fighter implements Comparable<Fighter>{
 		this.health = 7;
 		this.crashCount = 0;
 		this.initaitve = 0;
+		this.onslaught = 0;
 	}
 	
 	public int joinBattle(Stunt stunt) {
@@ -49,21 +52,8 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public Attack attackAgainst(Fighter target) {
+		this.onslaught = 0;
 		return strategy.toUse(this, target);
-	}
-	
-	public void witheringAttackAgainst(Fighter target) {
-		int witheringAttack = this.witheringAttack(Stunt.stunt());
-		int defense = target.defense(Stunt.stunt());
-		if(witheringAttack >= defense) {
-			int threshold = witheringAttack - defense;
-			int damage = countIn(roll(Math.min(threshold + this.witheringDamage() - target.witheringSoak(), weapon.overwhelming)));
-			this.initaitve += (damage + 1);
-			boolean crash = target.loseInitative(damage);
-			if(crash) {
-				this.initaitve += 5;
-			}
-		}
 	}
 	
 	public boolean loseInitative(int damage) {
@@ -99,7 +89,7 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public int defense(Stunt stunt) {
-		return ((dexterity + melee)/2) + stunt.staticValue - woundPenalty();
+		return ((dexterity + melee)/2) + stunt.staticValue - woundPenalty() - onslaught;
 	}
 	
 	public void resetToBaseInitiative() {

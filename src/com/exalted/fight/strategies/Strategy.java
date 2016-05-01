@@ -1,7 +1,7 @@
 package com.exalted.fight.strategies;
 
-import com.exalted.fight.Attack;
 import com.exalted.fight.Fighter;
+import com.exalted.fight.attacks.Attack;
 
 public interface Strategy {
 

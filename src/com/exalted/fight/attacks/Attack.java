@@ -1,4 +1,6 @@
-package com.exalted.fight;
+package com.exalted.fight.attacks;
+
+import com.exalted.fight.Fighter;
 
 public interface Attack {
 

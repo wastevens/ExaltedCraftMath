@@ -1,9 +1,9 @@
 package com.exalted.fight.strategies;
 
-import com.exalted.fight.Attack;
-import com.exalted.fight.DecisiveAttack;
 import com.exalted.fight.Fighter;
-import com.exalted.fight.WitheringAttack;
+import com.exalted.fight.attacks.Attack;
+import com.exalted.fight.attacks.DecisiveAttack;
+import com.exalted.fight.attacks.WitheringAttack;
 
 public class KillingBlow implements Strategy {
 
