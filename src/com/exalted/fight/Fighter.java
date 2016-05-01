@@ -89,7 +89,7 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public int defense(Stunt stunt) {
-		return ((dexterity + melee)/2) + stunt.staticValue - woundPenalty() - onslaught;
+		return ((dexterity + melee)/2) + weapon.defense + stunt.staticValue - woundPenalty() - onslaught;
 	}
 	
 	public void resetToBaseInitiative() {
