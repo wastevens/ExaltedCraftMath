@@ -11,7 +11,7 @@ public class CraftScenario {
 	public static void main(String a[]) {
 		int attempts = 1000;
 		int successes = 0;
-		Crafter crafter = new SiderealCrafter(5, Charms.SublimeArtface_Essence3, Charms.TimeEnough_Essence3, Charms.Crafting_Arts);
+		Crafter crafter = new SiderealCrafter(3, Charms.SublimeArtface_Essence3, Charms.TimeEnough_Essence3);
 		for(int i=0;i<attempts;i++) {
 			if(craftAttempt(crafter, Artifact.LEGENDARY, DIFFICULTY, TERMINUS)) {
 				successes++;
