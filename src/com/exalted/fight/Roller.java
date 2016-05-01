@@ -1,3 +1,4 @@
+package com.exalted.fight;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,11 +21,16 @@ public class Roller {
 		for(int i=0;i<diceToRoll;i++) {
 			rolled.add(roll());
 		}
+//		System.out.println("Rolling " + diceToRoll + " " + rolled);
 		return rolled;
 	}
 	
 	public static int roll() {
 		return die.nextInt(10)+1;
+	}
+	
+	public static int rollDie(int max) {
+		return die.nextInt(max)+1;
 	}
 	
 }
