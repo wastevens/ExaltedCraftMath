@@ -20,7 +20,7 @@ public class Fighter implements Comparable<Fighter>{
 	
 	public int health;
 	public int initaitve;
-	public int crashCount = 0;
+	public int crashCount;
 	
 	public Fighter(String name, int strength, int dexterity, int stamina, int melee, int wits, int awareness, Weapon weapon, Armor armor, Strategy strategy) {
 		this.name = name;
@@ -33,12 +33,17 @@ public class Fighter implements Comparable<Fighter>{
 		this.weapon = weapon;
 		this.armor = armor;
 		this.strategy = strategy;
-		this.health = 7;
-		this.initaitve = 0;
+		reset();
 	}
 
+	public void reset() {
+		this.health = 7;
+		this.crashCount = 0;
+		this.initaitve = 0;
+	}
+	
 	public int joinBattle(Stunt stunt) {
-		int i = countIn(roll(wits + awareness + stunt.dice)) + stunt.successes +3;
+		int i = countIn(roll(wits + awareness + stunt.dice - woundPenalty())) + stunt.successes +3;
 		System.out.println(name + " joins battle with a level " + stunt.name() + " stunt and gets " + i + " initiative");
 		return i;
 	}
@@ -117,6 +122,28 @@ public class Fighter implements Comparable<Fighter>{
 		throw new IllegalStateException("Dead fighters don't have penalties");
 	}
 
+	@Override
+	public String toString() {
+		String toReturn = "Name: " + name + "\n" + 
+	                      "Attributes\n" + 
+				          "Strength: " + strength + " Dexterity: " + dexterity + "\n" +
+				          "Stamina:  " + strength + " Wits:      " + wits + "\n" +
+				          "Melee:    " + melee +    " Awareness: " + awareness + "\n" +
+				          "Weapon: " + weapon.name() + " Armor: " + armor.name();
+	                      ;
+		return toReturn;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((Fighter)obj).name.equals(this.name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
 	@Override
 	public int compareTo(Fighter f) {
 		return f.initaitve - this.initaitve;

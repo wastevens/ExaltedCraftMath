@@ -11,33 +11,46 @@ import com.exalted.fight.strategies.KillingBlow;
 import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
-	private static final int NUMBER_OF_FIGHTS = 100;
-	private static final String ALICE = "Alice";
-	private static final String BOB = "Bob";
+	private static final int NUMBER_OF_FIGHTS = 10;
+	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new KillingBlow());
+	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new ThousandCuts());
 
 	public static void main(String a[]) {
-		Map<String, Integer> scoreBoard = new HashMap<>();
+		System.out.println("------------------");
+		System.out.println(ALICE);
+		System.out.println("------------------");
+		System.out.println(BOB);
+		System.out.println("------------------");
+		Map<Fighter, Integer> scoreBoard = new HashMap<>();
 		scoreBoard.put(ALICE, 0);
 		scoreBoard.put(BOB, 0);
 		for(int i=0;i<NUMBER_OF_FIGHTS;i++) {
-			String winner = fight();
+			Fighter winner = fight();
+			System.out.println("Fight " + (i+1) + " winner: " + winner.name);
 			scoreBoard.put(winner, scoreBoard.get(winner) + 1);			
 		}
-		System.out.println(scoreBoard);
+		System.out.println("------------------");
+		for (Fighter fighter : scoreBoard.keySet()) {
+			System.out.println(fighter.name + " wins: " + scoreBoard.get(fighter));
+		}
 	}
 
-	private static String fight() {
+	private static Fighter fight() {
 		List<Fighter> fighters = new ArrayList<>();
-		fighters.add(new Fighter(ALICE, 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new KillingBlow()));
-		fighters.add(new Fighter(BOB, 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new ThousandCuts()));
+		fighters.add(ALICE);
+		fighters.add(BOB);
+		fighters.forEach(f -> f.reset());
 		fighters.forEach(f -> f.joinBattle(Stunt.stunt()));
+		int round = 0;
 		while(fighters.stream().anyMatch(f -> f.health > 0)) {
+			++round;
+			System.out.println("Round " + round);
 			Collections.sort(fighters);
 			if(resolve(fighters.get(0), fighters.get(1))) {
-				return fighters.get(0).name;
+				return fighters.get(0);
 			}
 			if(resolve(fighters.get(1), fighters.get(0))) {
-				return fighters.get(0).name;
+				return fighters.get(1);
 			}
 			cleanUp(fighters);
 		}
