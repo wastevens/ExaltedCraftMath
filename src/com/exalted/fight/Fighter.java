@@ -95,7 +95,7 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public void resetToBaseInitiative() {
-		this.initaitve = Math.max(initaitve, 3);
+		this.initaitve = Math.min(Math.max(initaitve, 3), 3);
 	}
 	
 	public int woundPenalty() {

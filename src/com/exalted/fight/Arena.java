@@ -15,8 +15,8 @@ import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
 	private static final int NUMBER_OF_FIGHTS = 1000;
-	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, BaseWeapon.MORTAL_LIGHT, BaseArmor.MORTAL_LIGHT, new ThousandCuts());
-	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, BaseWeapon.MORTAL_LIGHT, BaseArmor.MORTAL_LIGHT, new KillingBlow());
+	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, BaseWeapon.MORTAL_LIGHT, BaseArmor.MORTAL_LIGHT, new KillingBlow());
+	private static final Fighter BOB = new Fighter("Bob", 4, 5, 4, 5, 5, 5, BaseWeapon.MORTAL_HEAVY, BaseArmor.MORTAL_HEAVY, new KillingBlow());
 
 	public static void main(String a[]) {
 		System.out.println("------------------");
