@@ -94,8 +94,8 @@ public class Fighter implements Comparable<Fighter>{
 		return Math.max(0,  ((dexterity + melee)/2) + weapon.defense() + stunt.staticValue - woundPenalty() - onslaught);
 	}
 	
-	public void resetToBaseInitiative() {
-		this.initaitve = Math.min(Math.max(initaitve, 3), 3);
+	public void resetToBaseInitiativeFromCrash() {
+		this.initaitve = Math.max(initaitve, 3);
 	}
 	
 	public int woundPenalty() {

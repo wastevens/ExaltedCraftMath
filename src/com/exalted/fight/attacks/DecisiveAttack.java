@@ -22,7 +22,7 @@ public class DecisiveAttack implements Attack {
 			int damage = countDecisive(roll(attacker.initaitve));
 			outcome += " for " + damage + " lethal damage!";
 			System.out.println(outcome);
-			attacker.resetToBaseInitiative();
+			attacker.initaitve = 3;
 			boolean killed = defender.loseHealth(damage);
 			if(killed) {
 				System.out.println(defender.name + " is dead!");
@@ -60,7 +60,7 @@ public class DecisiveAttack implements Attack {
 		int damage = countDecisive(roll(attacker.initaitve)) + 1;
 		outcome += " with " + attacker.initaitve + " damage dice for "+ damage + " lethal damage!";
 		System.out.println(outcome);
-		attacker.resetToBaseInitiative();
+		attacker.initaitve = 3;
 		defender.onslaught += 2;
 		boolean killed = defender.loseHealth(damage);
 		if(killed) {

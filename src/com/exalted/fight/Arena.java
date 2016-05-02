@@ -90,7 +90,7 @@ public class Arena {
 		for (Fighter fighter : fighters) {
 			if(fighter.crashCount == 1) {
 				fighter.crashCount = 0;
-				fighter.resetToBaseInitiative();
+				fighter.resetToBaseInitiativeFromCrash();
 				System.out.println(fighter.name + " has recovered from crash and reset to base intiative.");
 			} else if(fighter.crashCount > 0){
 				fighter.crashCount--;
