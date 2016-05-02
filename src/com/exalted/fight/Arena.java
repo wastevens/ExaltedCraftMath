@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.exalted.fight.attacks.ClashAttack;
 import com.exalted.fight.equipment.BaseArmor;
 import com.exalted.fight.equipment.BaseWeapon;
 import com.exalted.fight.strategies.KillingBlow;
@@ -14,8 +15,8 @@ import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
 	private static final int NUMBER_OF_FIGHTS = 1;
-	private static final Fighter ALICE = new Fighter("The Red Viper of Dorne", 3, 5, 3, 5, 4, 4, BaseWeapon.MORTAL_MEDIUM, BaseArmor.MORTAL_LIGHT, new ThousandCuts());
-	private static final Fighter BOB = new Fighter("The Mountain that Rides", 5, 3, 5, 4, 3, 3, BaseWeapon.MORTAL_HEAVY, BaseArmor.MORTAL_HEAVY, new KillingBlow());
+	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, BaseWeapon.MORTAL_LIGHT, BaseArmor.MORTAL_LIGHT, new ThousandCuts());
+	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, BaseWeapon.MORTAL_LIGHT, BaseArmor.MORTAL_LIGHT, new KillingBlow());
 
 	public static void main(String a[]) {
 		System.out.println("------------------");
@@ -51,12 +52,23 @@ public class Arena {
 			Fighter second = fighters.get(1);
 			System.out.println("Round " + round + " - " + first.status() + " - " + second.status());
 			
-			if(resolve(first, second)) {
-				return first;
+			if(first.initaitve == second.initaitve) {
+				resolveClash(first, second);
+				if(first.health <= 0) {
+					return second;
+				}
+				if(second.health <= 0) {
+					return first;
+				}
+			} else {
+				if(resolve(first, second)) {
+					return first;
+				}
+				if(resolve(second, first)) {
+					return second;
+				}
 			}
-			if(resolve(second, first)) {
-				return second;
-			}
+			
 			cleanUp(fighters);
 		}
 		throw new IllegalStateException("The fight never ended?");
@@ -68,6 +80,10 @@ public class Arena {
 			System.out.println(attacker.name + " wins!");
 		}
 		return kill;
+	}
+	
+	private static void resolveClash(Fighter f1, Fighter f2) {
+		new ClashAttack().attack(f1, f2);
 	}
 	
 	private static void cleanUp(Collection<Fighter> fighters) {
