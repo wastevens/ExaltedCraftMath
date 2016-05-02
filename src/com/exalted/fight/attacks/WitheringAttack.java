@@ -19,7 +19,7 @@ public class WitheringAttack implements Attack {
 		if(attack >= defense) {
 			outcome += " and hits (" + attack + " vs " + defense +")";
 			int threshold = attack - defense;
-			int damageDice = Math.max(threshold + attacker.witheringDamage() - defender.witheringSoak(), attacker.weapon.overwhelming);
+			int damageDice = Math.max(threshold + attacker.witheringDamage() - defender.witheringSoak(), attacker.weapon.overwhelming());
 			outcome += " with " + damageDice + " damage dice";
 			int damage = countIn(roll(damageDice));
 			outcome += " for " + damage + " Initiative damage!";
