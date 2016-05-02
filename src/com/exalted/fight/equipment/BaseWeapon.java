@@ -1,6 +1,6 @@
-package com.exalted.fight;
+package com.exalted.fight.equipment;
 
-public enum Weapon {
+public enum BaseWeapon {
 	MORTAL_LIGHT(4, 7, 0, 1),
 	MORTAL_MEDIUM(2, 9, 1, 1),
 	MORTAL_HEAVY(0, 11, -1, 1),
@@ -14,7 +14,7 @@ public enum Weapon {
 	public final int defense;
 	public final int overwhelming;
 
-	private Weapon(int accuracy, int damage, int defense, int overwhelming) {
+	private BaseWeapon(int accuracy, int damage, int defense, int overwhelming) {
 		this.accuracy = accuracy;
 		this.damage = damage;
 		this.defense = defense;

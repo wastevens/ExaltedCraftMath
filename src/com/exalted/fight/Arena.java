@@ -7,13 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.exalted.fight.equipment.BaseWeapon;
 import com.exalted.fight.strategies.KillingBlow;
 import com.exalted.fight.strategies.ThousandCuts;
 
 public class Arena {
 	private static final int NUMBER_OF_FIGHTS = 1;
-	private static final Fighter ALICE = new Fighter("Alice", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new KillingBlow());
-	private static final Fighter BOB = new Fighter("Bob", 5, 5, 5, 5, 5, 5, Weapon.MORTAL_LIGHT, Armor.MORTAL_LIGHT, new ThousandCuts());
+	private static final Fighter ALICE = new Fighter("The Red Viper of Dorne", 3, 5, 3, 5, 4, 4, BaseWeapon.MORTAL_MEDIUM, Armor.MORTAL_LIGHT, new ThousandCuts());
+	private static final Fighter BOB = new Fighter("The Mountain that Rides", 5, 3, 5, 4, 3, 3, BaseWeapon.MORTAL_HEAVY, Armor.MORTAL_HEAVY, new KillingBlow());
 
 	public static void main(String a[]) {
 		System.out.println("------------------");
