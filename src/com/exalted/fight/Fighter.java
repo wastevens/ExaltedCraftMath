@@ -1,7 +1,7 @@
 package com.exalted.fight;
 
 import com.exalted.fight.attacks.Attack;
-import com.exalted.fight.equipment.BaseArmor;
+import com.exalted.fight.equipment.Armor;
 import com.exalted.fight.equipment.BaseWeapon;
 import com.exalted.fight.strategies.Strategy;
 
@@ -18,7 +18,7 @@ public class Fighter implements Comparable<Fighter>{
 	public final int wits;
 	public final int awareness;
 	public final BaseWeapon weapon;
-	public final BaseArmor armor;
+	public final Armor armor;
 	public final Strategy strategy;
 	
 	public int health;
@@ -26,7 +26,7 @@ public class Fighter implements Comparable<Fighter>{
 	public int crashCount;
 	public int onslaught;
 	
-	public Fighter(String name, int strength, int dexterity, int stamina, int melee, int wits, int awareness, BaseWeapon weapon, BaseArmor armor, Strategy strategy) {
+	public Fighter(String name, int strength, int dexterity, int stamina, int melee, int wits, int awareness, BaseWeapon weapon, Armor armor, Strategy strategy) {
 		this.name = name;
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -79,7 +79,7 @@ public class Fighter implements Comparable<Fighter>{
 	}
 	
 	public int witheringSoak() {
-		return stamina + armor.soak;
+		return stamina + armor.soak();
 	}
 	
 	public int decisiveAttack(Stunt stunt) {
